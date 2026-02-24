@@ -10,7 +10,7 @@ interface RegisterData {
 
 @Component({
   selector: 'app-register',
-  imports: [],
+  imports: [FormField],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
