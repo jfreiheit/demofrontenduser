@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import {form, FormField, FieldState, required, email, minLength, maxLength, validate, pattern, submit} from '@angular/forms/signals';
+import { Role } from './role';
 
 interface RegisterData {
   username: string;
   email: string;
   password1: string;
   password2: string;
+  role: Role;
 }
 
 @Component({
@@ -21,8 +23,14 @@ export class Register {
     username: '',
     email: '',
     password1: '',
-    password2: ''
+    password2: '',
+    role: Role.User
   });
+
+  roleOptions: { value: Role; label: string }[] = [
+    { value: Role.User, label: 'Nutzer/in' },
+    { value: Role.Admin, label: 'Administrator/in' },
+  ];
 
   registerForm = form(this.registerModel,
     (schemaPath) => {
