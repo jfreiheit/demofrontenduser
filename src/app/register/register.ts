@@ -42,6 +42,7 @@ export class Register {
       required(schemaPath.password2, {message: 'Passwort-Bestätigung ist erforderlich'});
       minLength(schemaPath.password1, 8, {message: 'Passwort muss mindestens 8 Zeichen lang sein'});
       maxLength(schemaPath.password2, 100, {message: 'Passwort ist zu lang'});
+      pattern(schemaPath.password1, /(?=.*[A-Za-z])(?=.*\d)/, {message: 'Passwort muss mindestens einen Buchstaben und eine Ziffer enthalten'});
 
       // Cross-field: password and confirm must match
       validate(schemaPath.password1, ({ valueOf }) => {
