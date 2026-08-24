@@ -1,6 +1,79 @@
-<input type="text" placeholder="username" [formField]="registerForm.username" />
-<input type="email" placeholder="email" [formField]="registerForm.email" />
-<input type="password" placeholder="password" [formField]="registerForm.password1" />
-<input type="password" placeholder="confirm password" [formField]="registerForm.password2" />
-<button type="submit">Registrieren</button>
-<button type="reset">Abbrechen</button>
+<main class="h-full bg-zinc-600">
+  <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+      <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">Registrieren</h2>
+    </div>
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div class="bg-slate-50 py-8 px-4 shadow-xl sm:rounded-lg sm:px-10">
+        <form class="space-y-6" (submit)="onSubmit($event)">
+          <div>
+            <label for="username" class="block text-sm/6 font-medium text-gray-900">Nutzername</label>
+            <div class="mt-2">
+              <input placeholder="Nutzername" [formField]="registerForm.username"
+              id="username" type="text"
+              [class]="'block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-gray-900
+              outline-2 -outline-offset-1 placeholder:text-gray-500 focus:outline-2
+              focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6 '
+              + (isInvalid(registerForm.username()) ? 'outline-red-900' : 'outline-black/10')" />
+            </div>
+            @if (isInvalid(registerForm.username())) {
+              <p class="mt-2 text-sm text-red-700">{{ errorMessage(registerForm.username()) }}</p>
+            }
+          </div>
+          <div>
+            <label for="email" class="block text-sm/6 font-medium text-gray-900">E-Mail</label>
+            <div class="mt-2">
+              <input placeholder="E-Mail" [formField]="registerForm.email"
+              id="email" type="email"
+              [class]="'block w-full rounded-md bg-white/5 px-3 py-1.5
+              text-base text-gray-900 outline-2 -outline-offset-1
+              placeholder:text-gray-500
+              focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6 '
+              + (isInvalid(registerForm.email()) ? 'outline-red-900' : 'outline-black/10')" />
+            </div>
+            @if (isInvalid(registerForm.email())) {
+              <p class="mt-2 text-sm text-red-700">{{ errorMessage(registerForm.email()) }}</p>
+            }
+          </div>
+          <div>
+            <label for="password1" class="block text-sm/6 font-medium text-gray-900">Passwort</label>
+            <div class="mt-2">
+              <input placeholder="Passwort" [formField]="registerForm.password1"
+              id="password1" type="password"
+              [class]="'block w-full rounded-md bg-white/5 px-3 py-1.5
+              text-base text-gray-900 outline-2 -outline-offset-1
+              placeholder:text-gray-500
+              focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6 '
+              + (isInvalid(registerForm.password1()) ? 'outline-red-900' : 'outline-black/10')" />
+            </div>
+            @if (isInvalid(registerForm.password1())) {
+              <p class="mt-2 text-sm text-red-700">{{ errorMessage(registerForm.password1()) }}</p>
+            }
+          </div>
+          <div>
+            <label for="password2" class="block text-sm/6 font-medium text-gray-900">Passwort wiederholen</label>
+            <div class="mt-2">
+              <input placeholder="Passwort wiederholen" [formField]="registerForm.password2"
+              id="password2" type="password"
+              [class]="'block w-full rounded-md bg-white/5 px-3 py-1.5
+              text-base text-gray-900 outline-2 -outline-offset-1
+              placeholder:text-gray-500
+              focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6 '
+              + (isInvalid(registerForm.password2()) ? 'outline-red-900' : 'outline-black/10')" />
+            </div>
+            @if (isInvalid(registerForm.password2())) {
+              <p class="mt-2 text-sm text-red-700">{{ errorMessage(registerForm.password2()) }}</p>
+            }
+          </div>
+          <div>
+            <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-500
+            px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400
+            focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            [disabled]="registerForm().invalid()">
+            Registrieren</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
