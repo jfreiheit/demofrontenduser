@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import {form, FormField, FieldState, required, email, minLength, maxLength, validate, pattern, submit} from '@angular/forms/signals';
+import { RouterLink } from '@angular/router';
 import { Role } from './role';
 import { Auth } from '../auth';
 
@@ -13,7 +14,7 @@ interface RegisterData {
 
 @Component({
   selector: 'app-register',
-  imports: [FormField],
+  imports: [FormField, RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,6 +22,8 @@ interface RegisterData {
 export class Register {
 
   private readonly auth = inject(Auth);
+
+  registrationSucceeded = signal(false);
 
   registerModel = signal<RegisterData>({
     username: '',
@@ -63,7 +66,7 @@ export class Register {
     submit(this.registerForm, async () => {
       const { username, email, password1, role } = this.registerModel();
       this.auth.register({ username, email, password: password1, role }).subscribe({
-        next: (user) => console.log('Registriert:', user),
+        next: () => this.registrationSucceeded.set(true),
         error: (err) => console.error('Registrierung fehlgeschlagen:', err),
       });
     });
