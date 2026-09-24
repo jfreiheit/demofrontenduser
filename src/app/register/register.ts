@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import {form, FormField, FieldState, required, email, minLength, maxLength, validate, pattern, submit} from '@angular/forms/signals';
 import { Role } from './role';
+import { Auth } from '../auth';
 
 interface RegisterData {
   username: string;
@@ -18,6 +19,8 @@ interface RegisterData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Register {
+
+  private readonly auth = inject(Auth);
 
   registerModel = signal<RegisterData>({
     username: '',
@@ -57,12 +60,12 @@ export class Register {
 
   onSubmit(event: Event) {
     event.preventDefault();
-    console.log('submitted')
     submit(this.registerForm, async () => {
-      const credentials = this.registerModel();
-      // In a real app, this would be async:
-      // await this.authService.login(credentials);
-      console.log('Logging in with:', credentials);
+      const { username, email, password1, role } = this.registerModel();
+      this.auth.register({ username, email, password: password1, role }).subscribe({
+        next: (user) => console.log('Registriert:', user),
+        error: (err) => console.error('Registrierung fehlgeschlagen:', err),
+      });
     });
   }
 
