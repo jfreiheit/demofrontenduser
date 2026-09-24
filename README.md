@@ -20,6 +20,20 @@ flowchart LR
 | [`demouserfrontend`](.) (dieses Repo) | Angular-Single-Page-Application mit dem Registrierungsformular |
 | [`demouserbackend`](https://github.com/jfreiheit/demobackenduser) | REST-API, Persistierung der `User`-Daten in PostgreSQL |
 
+## Screenshots
+
+Registrierungsformular im Leerzustand:
+
+![Registrierungsformular](docs/screenshots/registrierung-leer.jpg)
+
+Ausgefülltes, gültiges Formular (Absenden-Button aktiviert):
+
+![Ausgefülltes Registrierungsformular](docs/screenshots/registrierung-ausgefuellt.jpg)
+
+Client-seitige Validierung bei ungültiger Eingabe:
+
+![Validierungsfehler im Registrierungsformular](docs/screenshots/registrierung-validierung.jpg)
+
 ## Tech-Stack
 
 **Frontend** (`demouserfrontend`)
