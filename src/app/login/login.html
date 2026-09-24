@@ -5,6 +5,9 @@
     </div>
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <div class="bg-slate-50 py-8 px-4 shadow-xl sm:rounded-lg sm:px-10">
+        @if (loggedInAs()) {
+          <p class="text-sm text-center text-gray-900">Angemeldet als {{ loggedInAs() }}.</p>
+        } @else {
         <form class="space-y-6" (submit)="onSubmit($event)">
           <div>
             <label for="usernameOrEmail" class="block text-sm/6 font-medium text-gray-900">Nutzername oder E-Mail</label>
@@ -35,6 +38,9 @@
               <p class="mt-2 text-sm text-red-700">{{ errorMessage(loginForm.password()) }}</p>
             }
           </div>
+          @if (serverError()) {
+            <p class="text-sm text-red-700">{{ serverError() }}</p>
+          }
           <div>
             <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-500
             px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400
@@ -42,7 +48,11 @@
             [disabled]="loginForm().invalid()">
             Anmelden</button>
           </div>
+          <p class="text-sm text-center text-gray-700">
+            Noch kein Konto? <a routerLink="/register" class="font-medium text-indigo-600 hover:text-indigo-500">Jetzt registrieren</a>
+          </p>
         </form>
+        }
       </div>
     </div>
   </div>

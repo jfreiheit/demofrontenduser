@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { form, FormField, FieldState, required, submit } from '@angular/forms/signals';
+import { RouterLink } from '@angular/router';
 import { Auth } from '../auth';
 
 interface LoginData {
@@ -9,7 +10,7 @@ interface LoginData {
 
 @Component({
   selector: 'app-login',
-  imports: [FormField],
+  imports: [FormField, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,6 +18,9 @@ interface LoginData {
 export class Login {
 
   private readonly auth = inject(Auth);
+
+  loggedInAs = signal<string | null>(null);
+  serverError = signal<string | null>(null);
 
   loginModel = signal<LoginData>({
     usernameOrEmail: '',
@@ -31,10 +35,11 @@ export class Login {
 
   onSubmit(event: Event) {
     event.preventDefault();
+    this.serverError.set(null);
     submit(this.loginForm, async () => {
       this.auth.login(this.loginModel()).subscribe({
-        next: (result) => console.log('Angemeldet als', result.username),
-        error: (err) => console.error('Anmeldung fehlgeschlagen:', err),
+        next: (result) => this.loggedInAs.set(result.username),
+        error: (err) => this.serverError.set(err.error?.message ?? 'Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.'),
       });
     });
   }
