@@ -35,7 +35,7 @@ flowchart LR
 
 | Repository | Aufgabe |
 |---|---|
-| [`demouserfrontend`](.) (dieses Repo) | Angular-Single-Page-Application mit dem Registrierungsformular |
+| [`demouserfrontend`](.) (dieses Repo) | Angular-Single-Page-Application mit Registrierungs- und Login-Formular |
 | [`demouserbackend`](https://github.com/jfreiheit/demobackenduser) | REST-API, Persistierung der `User`-Daten in PostgreSQL |
 
 ## REST-API
@@ -74,6 +74,14 @@ Ausgefülltes, gültiges Formular (Absenden-Button aktiviert):
 Client-seitige Validierung bei ungültiger Eingabe:
 
 ![Validierungsfehler im Registrierungsformular](docs/screenshots/registrierung-validierung.jpg)
+
+Login-Formular im Leerzustand:
+
+![Login-Formular](docs/screenshots/login-leer.jpg)
+
+Nach erfolgreicher Anmeldung:
+
+![Erfolgreiche Anmeldung](docs/screenshots/login-erfolgreich.jpg)
 
 ## Tech-Stack
 
@@ -155,8 +163,11 @@ ng test
 demofrontenduser/
 ├── src/app/
 │   ├── register/        # Registrierungs-Komponente (Formular, Validierung, Styling)
-│   └── app.routes.ts     # Routing
-└── docs/screenshots/      # Screenshots für diese README
+│   ├── login/            # Login-Komponente
+│   ├── auth.ts            # AuthService (HttpClient-Aufrufe an /register und /login)
+│   └── app.routes.ts       # Routing
+├── src/environments/       # Backend-URL je Umgebung (apiBaseUrl)
+└── docs/screenshots/        # Screenshots für diese README
 
 demouserbackend/
 └── src/main/java/htw/freiheit/user/
@@ -174,14 +185,14 @@ Beide Repositories befinden sich im frühen Aufbau und werden im Rahmen der Lehr
 
 Umgesetzt:
 
-- Registrierungsformular mit clientseitiger Validierung und Styling (Frontend)
+- Registrierungs- und Login-Formular mit clientseitiger Validierung und Styling (Frontend)
 - `User`-Entität, Repository inkl. CRUD-Tests, Datenbankanbindung (Backend)
 - REST-Endpoint `POST /register` mit Passwort-Hashing und Validierung (Backend)
 - REST-Endpoint `POST /login` mit JWT-Erzeugung (Backend)
+- Frontend ist über `AuthService` an beide Endpoints angebunden (inkl. CORS-Freischaltung), JWT wird nach Login clientseitig gespeichert
 
 Offen:
 
-- Anbindung des Frontends an die Backend-Endpoints (aktuell simuliert das Formular das Absenden nur clientseitig)
 - Geschützte Endpoints und rollenbasierte Autorisierung anhand des JWT
 
 ## Zugehöriges Repository & Projektboard
