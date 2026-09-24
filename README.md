@@ -61,6 +61,8 @@ curl -X POST http://localhost:8080/login \
 
 Das zurückgegebene JWT wird bislang nur erzeugt, aber noch nicht zum Schutz weiterer Endpoints ausgewertet (siehe [Projektstatus](#projektstatus)).
 
+Interaktive OpenAPI-Dokumentation (Swagger UI) bei laufendem Backend: [`http://localhost:8080/swagger-ui.html`](http://localhost:8080/swagger-ui.html) — dort lassen sich beide Endpoints direkt im Browser ausprobieren, inklusive Beispiel-Requests und aller möglichen Statuscodes. Die zugrunde liegende Spezifikation (JSON) liegt unter `/v3/api-docs`.
+
 ## Screenshots
 
 Registrierungsformular im Leerzustand:
