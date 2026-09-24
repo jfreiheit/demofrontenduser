@@ -52,11 +52,11 @@ Beispiel:
 ```bash
 curl -X POST http://localhost:8080/register \
   -H "Content-Type: application/json" \
-  -d '{"username":"erika","email":"erika@htw-berlin.de","password":"Sicher123","role":"user"}'
+  -d '{"username":"erika","email":"erika@example.com","password":"<Platzhalter-Passwort>","role":"user"}'
 
 curl -X POST http://localhost:8080/login \
   -H "Content-Type: application/json" \
-  -d '{"usernameOrEmail":"erika","password":"Sicher123"}'
+  -d '{"usernameOrEmail":"erika","password":"<Platzhalter-Passwort>"}'
 ```
 
 Das zurückgegebene JWT wird bislang nur erzeugt, aber noch nicht zum Schutz weiterer Endpoints ausgewertet (siehe [Projektstatus](#projektstatus)).
