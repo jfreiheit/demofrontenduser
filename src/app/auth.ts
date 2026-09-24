@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from '../environments/environment';
 
 export interface RegisterPayload {
@@ -17,6 +17,19 @@ export interface RegisteredUser {
   role: string;
 }
 
+export interface LoginPayload {
+  usernameOrEmail: string;
+  password: string;
+}
+
+export interface LoginResult {
+  token: string;
+  username: string;
+  role: string;
+}
+
+const TOKEN_STORAGE_KEY = 'auth_token';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -26,5 +39,11 @@ export class Auth {
 
   register(payload: RegisterPayload): Observable<RegisteredUser> {
     return this.http.post<RegisteredUser>(`${this.baseUrl}/register`, payload);
+  }
+
+  login(payload: LoginPayload): Observable<LoginResult> {
+    return this.http.post<LoginResult>(`${this.baseUrl}/login`, payload).pipe(
+      tap((result) => localStorage.setItem(TOKEN_STORAGE_KEY, result.token))
+    );
   }
 }
