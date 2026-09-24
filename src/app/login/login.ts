@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { form, FormField, FieldState, required, submit } from '@angular/forms/signals';
+import { Auth } from '../auth';
 
 interface LoginData {
   usernameOrEmail: string;
@@ -15,6 +16,8 @@ interface LoginData {
 })
 export class Login {
 
+  private readonly auth = inject(Auth);
+
   loginModel = signal<LoginData>({
     usernameOrEmail: '',
     password: '',
@@ -29,7 +32,10 @@ export class Login {
   onSubmit(event: Event) {
     event.preventDefault();
     submit(this.loginForm, async () => {
-      console.log('submitted', this.loginModel());
+      this.auth.login(this.loginModel()).subscribe({
+        next: (result) => console.log('Angemeldet als', result.username),
+        error: (err) => console.error('Anmeldung fehlgeschlagen:', err),
+      });
     });
   }
 
