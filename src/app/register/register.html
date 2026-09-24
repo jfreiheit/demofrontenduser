@@ -5,6 +5,15 @@
     </div>
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <div class="bg-slate-50 py-8 px-4 shadow-xl sm:rounded-lg sm:px-10">
+        @if (registrationSucceeded()) {
+          <div class="space-y-4 text-center">
+            <p class="text-sm text-gray-900">Registrierung erfolgreich.</p>
+            <a routerLink="/login" class="flex w-full justify-center rounded-md bg-indigo-500
+            px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400
+            focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+            Jetzt anmelden</a>
+          </div>
+        } @else {
         <form class="space-y-6" (submit)="onSubmit($event)">
           <div>
             <label for="username" class="block text-sm/6 font-medium text-gray-900">Nutzername</label>
@@ -79,6 +88,9 @@
               </select>
             </div>
           </div>
+          @if (serverError()) {
+            <p class="text-sm text-red-700">{{ serverError() }}</p>
+          }
           <div>
             <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-500
             px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400
@@ -87,6 +99,7 @@
             Registrieren</button>
           </div>
         </form>
+        }
       </div>
     </div>
   </div>

@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import {form, FormField, FieldState, required, email, minLength, maxLength, validate, pattern, submit} from '@angular/forms/signals';
+import { RouterLink } from '@angular/router';
 import { Role } from './role';
+import { Auth } from '../auth';
 
 interface RegisterData {
   username: string;
@@ -12,12 +14,17 @@ interface RegisterData {
 
 @Component({
   selector: 'app-register',
-  imports: [FormField],
+  imports: [FormField, RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Register {
+
+  private readonly auth = inject(Auth);
+
+  registrationSucceeded = signal(false);
+  serverError = signal<string | null>(null);
 
   registerModel = signal<RegisterData>({
     username: '',
@@ -57,12 +64,13 @@ export class Register {
 
   onSubmit(event: Event) {
     event.preventDefault();
-    console.log('submitted')
+    this.serverError.set(null);
     submit(this.registerForm, async () => {
-      const credentials = this.registerModel();
-      // In a real app, this would be async:
-      // await this.authService.login(credentials);
-      console.log('Logging in with:', credentials);
+      const { username, email, password1, role } = this.registerModel();
+      this.auth.register({ username, email, password: password1, role }).subscribe({
+        next: () => this.registrationSucceeded.set(true),
+        error: (err) => this.serverError.set(err.error?.message ?? 'Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.'),
+      });
     });
   }
 
