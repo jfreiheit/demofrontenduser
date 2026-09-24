@@ -1,59 +1,35 @@
-# Demouserfrontend
+# DemoUser – Nutzerinnenverwaltung
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
+Beispielprojekt einer Nutzerinnen-/Nutzerverwaltung (Registrierung, künftig Login/Rollen), bestehend aus einem Angular-Frontend und einem Spring-Boot-Backend. Das Projekt entsteht begleitend zur Lehrveranstaltung **Softwareentwicklungsprojekt** (3. Semester, HTW Berlin) und dient dort als durchgängiges Beispiel für Feature-Entwicklung, Git-Branching und die Zusammenarbeit über Issues und Pull Requests auf GitHub.
 
-## Development server
+Diese README selbst ist Teil des Lehrmaterials: Sie soll Studierenden zeigen, wie eine aussagekräftige README für ein Softwareentwicklungsprojekt mit mehreren Teilsystemen aufgebaut sein kann.
 
-To start a local development server, run:
+## Architektur
 
-```bash
-ng serve
+Das Projekt besteht aus zwei eigenständigen Repositories, die gemeinsam eine klassische 3-Schichten-Architektur bilden:
+
+```mermaid
+flowchart LR
+    A[Browser] -->|HTTP :4200| B["Frontend<br/>demouserfrontend<br/>Angular 21 + Tailwind CSS"]
+    B -->|REST/JSON :8080| C["Backend<br/>demouserbackend<br/>Spring Boot 4 / Java 21"]
+    C -->|JDBC :5432| D[(PostgreSQL<br/>demousersdb)]
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+| Repository | Aufgabe |
+|---|---|
+| [`demouserfrontend`](.) (dieses Repo) | Angular-Single-Page-Application mit dem Registrierungsformular |
+| [`demouserbackend`](https://github.com/jfreiheit/demobackenduser) | REST-API, Persistierung der `User`-Daten in PostgreSQL |
 
-## Code scaffolding
+## Tech-Stack
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+**Frontend** (`demouserfrontend`)
 
-```bash
-ng generate component component-name
-```
+- [Angular 21](https://angular.dev) mit Standalone Components
+- neue [Signal Forms API](https://angular.dev/guide/forms) (`@angular/forms/signals`) statt `ReactiveFormsModule`
+- [Tailwind CSS 4](https://tailwindcss.com) für das Styling
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+**Backend** (`demouserbackend`)
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [Spring Boot 4](https://spring.io/projects/spring-boot) (Java 21), Paket `htw.freiheit.user`
+- Spring Data JPA / Hibernate
+- [PostgreSQL](https://www.postgresql.org)
