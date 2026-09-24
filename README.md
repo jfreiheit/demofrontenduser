@@ -1,8 +1,32 @@
 # DemoUser – Nutzerinnenverwaltung
 
+![Angular](https://img.shields.io/badge/Angular-21-DD0031?logo=angular&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0-6DB33F?logo=springboot&logoColor=white)
+![Java](https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169E1?logo=postgresql&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
+![Status](https://img.shields.io/badge/Status-in%20Entwicklung-yellow)
+
 Beispielprojekt einer Nutzerinnen-/Nutzerverwaltung (Registrierung, künftig Login/Rollen), bestehend aus einem Angular-Frontend und einem Spring-Boot-Backend. Das Projekt entsteht begleitend zur Lehrveranstaltung **Softwareentwicklungsprojekt** (3. Semester, HTW Berlin) und dient dort als durchgängiges Beispiel für Feature-Entwicklung, Git-Branching und die Zusammenarbeit über Issues und Pull Requests auf GitHub.
 
 Diese README selbst ist Teil des Lehrmaterials: Sie soll Studierenden zeigen, wie eine aussagekräftige README für ein Softwareentwicklungsprojekt mit mehreren Teilsystemen aufgebaut sein kann.
+
+## Inhaltsverzeichnis
+
+- [Architektur](#architektur)
+- [Screenshots](#screenshots)
+- [Tech-Stack](#tech-stack)
+- [Voraussetzungen](#voraussetzungen)
+- [Erste Schritte](#erste-schritte)
+  - [Backend starten](#backend-starten)
+  - [Frontend starten](#frontend-starten)
+- [Tests](#tests)
+- [Projektstruktur](#projektstruktur)
+- [Projektstatus](#projektstatus)
+- [Zugehöriges Repository & Projektboard](#zugehöriges-repository--projektboard)
+- [Workflow & Mitwirken](#workflow--mitwirken)
+- [Lizenz](#lizenz)
+- [Autor](#autor)
 
 ## Architektur
 
@@ -120,3 +144,29 @@ demouserbackend/
     ├── repository/        # `UserRepository`
     └── UserApplication.java
 ```
+
+## Projektstatus
+
+Beide Repositories befinden sich im frühen Aufbau und werden im Rahmen der Lehrveranstaltung schrittweise erweitert (Issue für Issue, siehe [Projektboard](#zugehöriges-repository--projektboard)):
+
+- ✅ Registrierungsformular mit clientseitiger Validierung und Styling (Frontend)
+- ✅ `User`-Entität, Repository inkl. CRUD-Tests, Datenbankanbindung (Backend)
+- ⏳ REST-Endpoint `POST /register` und Anbindung des Frontends an das Backend
+- ⏳ Login und rollenbasierte Autorisierung
+
+## Zugehöriges Repository & Projektboard
+
+- Backend-Repository: [github.com/jfreiheit/demobackenduser](https://github.com/jfreiheit/demobackenduser)
+- Gemeinsames GitHub-Projectboard beider Repos: [github.com/users/jfreiheit/projects/1](https://github.com/users/jfreiheit/projects/1)
+
+## Workflow & Mitwirken
+
+Neue Features entstehen konsequent nach dem Muster *User Story → Akzeptanzkriterien als Sub-Issues → Feature-Branch → Commit(s) → Pull Request*. Der komplette Ablauf inklusive Branch- und Commit-Konventionen ist für die Lehrveranstaltung dokumentiert unter: [freiheit.f4.htw-berlin.de/projekte/git](http://freiheit.f4.htw-berlin.de/projekte/git/).
+
+## Lizenz
+
+Lehrmaterial der HTW Berlin für die Lehrveranstaltung Softwareentwicklungsprojekt – keine gesonderte Open-Source-Lizenz vergeben.
+
+## Autor
+
+Jörn Freiheit, HTW Berlin – [freiheit@htw-berlin.de](mailto:freiheit@htw-berlin.de)
