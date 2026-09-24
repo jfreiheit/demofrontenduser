@@ -24,6 +24,7 @@ export class Register {
   private readonly auth = inject(Auth);
 
   registrationSucceeded = signal(false);
+  serverError = signal<string | null>(null);
 
   registerModel = signal<RegisterData>({
     username: '',
@@ -63,11 +64,12 @@ export class Register {
 
   onSubmit(event: Event) {
     event.preventDefault();
+    this.serverError.set(null);
     submit(this.registerForm, async () => {
       const { username, email, password1, role } = this.registerModel();
       this.auth.register({ username, email, password: password1, role }).subscribe({
         next: () => this.registrationSucceeded.set(true),
-        error: (err) => console.error('Registrierung fehlgeschlagen:', err),
+        error: (err) => this.serverError.set(err.error?.message ?? 'Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.'),
       });
     });
   }

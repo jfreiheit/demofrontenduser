@@ -88,6 +88,9 @@
               </select>
             </div>
           </div>
+          @if (serverError()) {
+            <p class="text-sm text-red-700">{{ serverError() }}</p>
+          }
           <div>
             <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-500
             px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400
