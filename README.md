@@ -1,12 +1,5 @@
 # DemoUser – Nutzerinnenverwaltung
 
-![Angular](https://img.shields.io/badge/Angular-21-DD0031?logo=angular&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0-6DB33F?logo=springboot&logoColor=white)
-![Java](https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169E1?logo=postgresql&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
-![Status](https://img.shields.io/badge/Status-in%20Entwicklung-yellow)
-
 Beispielprojekt einer Nutzerinnen-/Nutzerverwaltung (Registrierung, Login mit JWT, künftig rollenbasierte Autorisierung), bestehend aus einem Angular-Frontend und einem Spring-Boot-Backend. Das Projekt entsteht begleitend zur Lehrveranstaltung **Softwareentwicklungsprojekt** (3. Semester, HTW Berlin) und dient dort als durchgängiges Beispiel für Feature-Entwicklung, Git-Branching und die Zusammenarbeit über Issues und Pull Requests auf GitHub.
 
 Diese README selbst ist Teil des Lehrmaterials: Sie soll Studierenden zeigen, wie eine aussagekräftige README für ein Softwareentwicklungsprojekt mit mehreren Teilsystemen aufgebaut sein kann.
@@ -177,14 +170,19 @@ demouserbackend/
 
 ## Projektstatus
 
-Beide Repositories befinden sich im frühen Aufbau und werden im Rahmen der Lehrveranstaltung schrittweise erweitert (Issue für Issue, siehe [Projektboard](#zugehöriges-repository--projektboard)):
+Beide Repositories befinden sich im frühen Aufbau und werden im Rahmen der Lehrveranstaltung schrittweise erweitert (Issue für Issue, siehe [Projektboard](#zugehöriges-repository--projektboard)).
 
-- ✅ Registrierungsformular mit clientseitiger Validierung und Styling (Frontend)
-- ✅ `User`-Entität, Repository inkl. CRUD-Tests, Datenbankanbindung (Backend)
-- ✅ REST-Endpoint `POST /register` mit Passwort-Hashing und Validierung (Backend)
-- ✅ REST-Endpoint `POST /login` mit JWT-Erzeugung (Backend)
-- ⏳ Anbindung des Frontends an die Backend-Endpoints (aktuell simuliert das Formular das Absenden nur clientseitig)
-- ⏳ Geschützte Endpoints und rollenbasierte Autorisierung anhand des JWT
+Umgesetzt:
+
+- Registrierungsformular mit clientseitiger Validierung und Styling (Frontend)
+- `User`-Entität, Repository inkl. CRUD-Tests, Datenbankanbindung (Backend)
+- REST-Endpoint `POST /register` mit Passwort-Hashing und Validierung (Backend)
+- REST-Endpoint `POST /login` mit JWT-Erzeugung (Backend)
+
+Offen:
+
+- Anbindung des Frontends an die Backend-Endpoints (aktuell simuliert das Formular das Absenden nur clientseitig)
+- Geschützte Endpoints und rollenbasierte Autorisierung anhand des JWT
 
 ## Zugehöriges Repository & Projektboard
 
